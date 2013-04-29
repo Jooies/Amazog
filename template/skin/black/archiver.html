@@ -1,0 +1,17 @@
+<{include file="skin/black/header.html"}>            
+<div class="col12">
+<h5>共有<{$count}>篇文章</h5>
+<div id="content">
+<ul>
+<{foreach from=$archiver item=v}>
+<{if $newmonth != $v.month}>
+<{$newmonth = $v.month}>
+<li><{$v.year}>年<{$v.month}>月
+<{/if}>
+<li><{$v.day}>日：<a href="<{spUrl c=main a=post pid=$v.pid cid=$v.cid}>"><{$v.title}></a> (<{$v.m_count}>)</li>
+<{/foreach}>
+</ul>
+</div>
+</div>
+<{include file="skin/black/sidebar.html"}>
+<{include file="skin/black/footer.html"}>

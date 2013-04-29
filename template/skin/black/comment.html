@@ -1,0 +1,52 @@
+<script>
+function reply(name){
+ document.comment.content.focus();
+ document.comment.content.value="<em>回复 @"+name+"：</em>";
+}
+</script>
+<ul class="page-navigator">
+<{if $pager}>
+<{if $pager.current_page != $pager.first_page}>
+<li><a href="<{$page_prev}>">上一页</a></li>
+<{/if}>
+<{foreach from=$pager.mid_pages item=thepage}>
+<{if $thepage != $pager.current_page}>
+<li>
+<{if $page.pid}><a href="<{spUrl c=main a=page pid=$page.pid page=$thepage}>#comments">
+<{else}><a href="<{spUrl c=main a=post pid=$post.pid page=$thepage}>#comments">
+<{/if}>
+<{$thepage}></a></li>
+<{else}>
+<li><a class="active"><{$thepage}></a></li>
+<{/if}>
+<{/foreach}>
+<{if $pager.current_page != $pager.last_page}>
+<li><a href="<{$page_next}>">下一页</a></li>
+<{/if}>
+<{else}><{/if}></ul>
+<div id="comments">
+<ul class="comment-new-list-ul">
+<{foreach from=$comments item=value}>
+<div class="comments">
+<li id="comment_<{$value.m_id}>">
+<a target="_blank" class="comment-new-list-avatar"><img src="<{getavatar gravatar_id = $value.email size=20}>" alt="" /></a>
+<a href="<{$value.website}>" target="_blank"><{$value.m_author}></a><span class="comments-time"><{$value.time|date_format:"%Y-%m-%d"}></span><{if $username}><a href="#text" onclick="javascript:reply('<{$value.m_author}>','<{$value.website}>')" class="comment-back">回复</a>
+<{else}><{/if}>
+<div class="comment-new-list-text"><{$value.content}></div>
+</div>
+<{foreachelse}>
+暂无评论！
+<{/foreach}>
+</li>
+</ul>
+</div>
+<{if $username}>
+<form name="comment" action="<{if $page.pid}><{spUrl c=main a=comments_page pid=$page.pid}><{else}><{spUrl c=main a=comments_post pid=$post.pid cid=$post.cid}><{/if}>" method="post">
+<textarea name="content" id="text" class="textarea"></textarea>
+<button class="btn">评论</button>
+</form><br><br>
+<{else}>
+<div class="ui-faq-question">
+<p>您需要 <a href="<{spUrl c=main a=login}>">登陆</a> 后才可以评论，如果您没有账号，可以 <a href="<{spUrl c=main a=register}>">注册</a> 。</p>
+</div>
+<{/if}>

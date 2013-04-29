@@ -1,0 +1,15 @@
+<{include file="skin/black/header.html"}>            
+<div class="col12">
+<h6>
+<div class="pull-right">
+最后修改时间：<{$page.time|date_format:"%Y-%m-%d"}> / 
+<a href="#comments"><{$page.m_count}> 个评论</a>
+</div>
+</h6>
+<h5><{$page.title}></h5>
+<div id="content">
+<{$page.content}>
+</div>
+<{include file="skin/black/comment.html"}>
+<{include file="skin/black/sidebar.html"}>
+<{include file="skin/black/footer.html"}>

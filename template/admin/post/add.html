@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="public/css/admin.css" rel="stylesheet" media="screen">
+<style>
+.box {text-align: left;width: 725px}
+.input-block-level {width: 545px !important;}
+select {width: 100px !important;}
+</style>
+</head>
+<div class="box">
+<!--form-->
+<form action="<{spUrl c=post a=add}>" method="post">
+<!--title-->
+<div class="row">
+<label class="label">文章标题：</label>
+<input type="text" name="title" class="input-block-level" placeholder="请输入文章标题...">
+<select name="category">
+<{foreach from=$category item=value}>
+<option><{$value.name}></option>
+<{/foreach}>
+</select>
+</div><br>
+<textarea name="content"></textarea><br><br>
+<div class="row">
+<label class="label">文章标签: </label>
+<input type="text" name="tags" class="input-block-level" placeholder="请输入文章标签..."><br><br>
+<input type="submit" name="c_submit" value="撰写完成" class="submit">
+</div>      
+</form>
+</html>

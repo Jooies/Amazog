@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="public/css/admin.css" rel="stylesheet" media="screen">
+</head>
+<div class="box">
+<table width="100%" class="table">
+<tr>
+<td>用户ID</td>
+<td>用户名</td>
+<td>邮箱</td>
+<td>网站</td>
+<td>管理</td>
+ </tr>
+<{foreach from=$user item=value}>
+<tr>
+<td width="8%"><{$value.id}></td>
+<td width="30%"><{$value.username}></td>
+<td width="20%"><{$value.email}></td>
+<td><{$value.website}></td>
+<td width="12%">编辑 | 删除</td>
+</tr>
+<{/foreach}>
+</table>
+<{if $pager}><br>
+<{if $pager.current_page != $pager.first_page}>
+<a href="<{spUrl c=page a=admin page=$pager.first_page}>">首页</a> |
+<a href="<{spUrl c=page a=admin page=$pager.prev_page}>">上一页</a> |
+<{/if}>
+<{foreach from=$pager.all_pages item=thepage}>
+<{if $thepage != $pager.current_page}>
+<a href="<{spUrl c=page a=admin page=$thepage}>"><{$thepage}></a>
+<{else}>
+<b><{$thepage}></b>
+<{/if}>
+<{/foreach}>
+<{if $pager.current_page != $pager.last_page}>
+<a href="<{spUrl c=page a=admin page=$pager.next_page}>">下一页</a> |
+<a href="<{spUrl c=page a=admin page=$pager.last_page}>">尾页</a>
+<{/if}>
+<{/if}>
+</div>
+</html>
+

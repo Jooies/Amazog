@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="public/css/admin.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="public/js/jquery.js"></script>
+</head>
+<div class="box">
+<div class="pull-left"><a id="go" rel="leanModal" href="<{spUrl c=category a=add}>" class="submit">添加分类</a></div><br><br>
+<table width="100%" class="table">
+<tr>
+<td class="title"><em>分类名称</em></td>
+<td class="time" width="10%"><em>动作</em></td>
+</tr>
+<{foreach from=$category item=value}>
+<tr>
+<td><{$value.name}></td>
+<td class="time"><a href="<{spUrl c=category a=modify cid=$value.cid}>">编辑</a> | <a href="<{spUrl c=category a=delete cid=$value.cid}>" onclick="if(confirm('确实要删除此条记录吗？删除分类请将删除所有分类中的文章删除！')) return true;else return false;">删除</a></td>
+</tr>
+<{/foreach}>
+</table>
+<{if $pager}><br>
+<{if $pager.current_page != $pager.first_page}>
+<a href="<{spUrl c=category a=admin page=$pager.first_page}>">首页</a> |
+<a href="<{spUrl c=category a=admin page=$pager.prev_page}>">上一页</a> |
+<{/if}>
+<{foreach from=$pager.all_pages item=thepage}>
+<{if $thepage != $pager.current_page}>
+<a href="<{spUrl c=category a=admin page=$thepage}>"><{$thepage}></a>
+<{else}>
+<b><{$thepage}></b>
+<{/if}>
+<{/foreach}>              
+<{if $pager.current_page != $pager.last_page}>
+<a href="<{spUrl c=category a=admin page=$pager.next_page}>">下一页</a> |
+<a href="<{spUrl c=category a=admin page=$pager.last_page}>">尾页</a>
+<{/if}>
+<{/if}>
+</div>
+</div>
+<div id="text">
+<form action="<{spUrl c=category a=add}>" method="post">
+<input type="text" name="name" placeholder="请输入分类名...">
+<input style="padding:2px 41px" type="submit" name="c_submit" value="添加" class="submit">
+<a id="modal_close" class="close" href="#">×</a>
+</div>
+</div>
+</html>
+

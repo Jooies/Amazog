@@ -1,0 +1,17 @@
+<{include file="skin/black/header.html"}>  
+<div class="col12">
+<h6>
+<div class="pull-right">
+发布时间：<{$post.time|date_format:"%Y-%m-%d"}> /
+分类：<a href="<{spUrl c=main a=index cid=$post.cid}>"><{$category}></a> /
+<a href="#comments"><{$post.m_count}> 个评论</a>
+</div>
+</h6>
+<h5><{$post.title}></h5>
+<div id="content"><{$post.content}></div>
+<div id="tag">
+标签: <{foreach from=$tag item=value}><a href="<{spUrl c=main tag=$value}>" class="tag"><{$value}></a><{/foreach}>
+</div>
+<{include file="skin/black/comment.html"}>
+<{include file="skin/black/sidebar.html"}>
+<{include file="skin/black/footer.html"}>

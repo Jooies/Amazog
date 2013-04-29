@@ -1,0 +1,35 @@
+<{include file="skin/black/header.html"}>
+<div class="col12">
+<{foreach from=$post item=value}>
+<h6>
+<div class="pull-right">
+<{$value.time|date_format:"%Y-%m-%d"}> / 
+<a href="<{spUrl c=main a=post pid=$value.pid}>#comments"><{$value.m_count}> 个评论</a>
+</div>
+</h6>
+<h5><a href="<{spUrl c=main a=post pid=$value.pid}>"><{$value.title}></a></h5>
+<div id="content"><{onmore c=$value.content}></div>
+<{/foreach}>
+<{$postno}>
+<{if $pager}><div class="container_bottom"><ul class="page-navigator">
+<{if $pager.current_page != $pager.first_page}>
+<li><a href="<{$page_prev}>">上一页</a></li>
+<{/if}>
+<{foreach from=$pager.mid_pages item=thepage}>
+<{if $thepage != $pager.current_page}>
+<li><{if $cid}><a href="<{spUrl c=main a=index cid=$cid.cid page=$thepage}>">
+	<{else}><{if $s}><a href="<{spUrl c=main a=index s=$s page=$thepage}>">
+	<{else}><{if $tag}><a href="<{spUrl c=main a=index tag=$tag page=$thepage}>">
+	<{else}><a href="<{spUrl c=main a=index page=$thepage}>"><{/if}><{/if}>
+	<{/if}><{$thepage}></a></li>
+<{else}>
+<li><a class="active"><{$thepage}></a></li>
+<{/if}>
+<{/foreach}>
+<{if $pager.current_page != $pager.last_page}>
+<li><a href="<{$page_next}>">下一页</a></li>
+<{/if}>
+</ul></div>
+<{/if}>
+<{include file="skin/black/sidebar.html"}>
+<{include file="skin/black/footer.html"}>
